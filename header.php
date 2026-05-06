@@ -19,7 +19,11 @@
       <div class="columnar">
         <div class="header-wrap">
           <?php
-          $logo = get_field('header_logo', 'option') ?: get_field('logo', 'option');
+          // Front page uses `header_logo`; internal pages use `header_logo_internal`
+          // (with fallback to the home-page logo if the internal one isn't set).
+          $home_logo = get_field('header_logo', 'option') ?: get_field('logo', 'option');
+          $internal_logo = get_field('header_logo_internal', 'option');
+          $logo = is_front_page() ? $home_logo : ($internal_logo ?: $home_logo);
           if ($logo) : ?>
             <a href="<?php echo esc_url(home_url('/')); ?>" class="logo">
               <?php echo adolfo_render_image($logo, array(
