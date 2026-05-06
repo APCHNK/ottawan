@@ -126,6 +126,9 @@
   }
 
   .swiper-slide {
+    display: flex;
+    gap: 20px;
+    flex-direction: column;
     p {
       font-family: $font-sans;
       color: $color-text;

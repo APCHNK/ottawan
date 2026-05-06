@@ -2159,6 +2159,11 @@ header.open-menu .toggle-menu .close-icon {
     width: 737px;
   }
 }
+.description-slider .swiper-slide {
+  display: flex;
+  gap: 20px;
+  flex-direction: column;
+}
 .description-slider .swiper-slide p {
   font-family: "Inclusive Sans", sans-serif;
   color: #000000;
