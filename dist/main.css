@@ -1878,13 +1878,13 @@ header.open-menu .toggle-menu .close-icon {
 .schedule {
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 32px;
   padding: 30px 0;
   color: #000000;
 }
 @media (min-width: 768px) {
   .schedule {
-    gap: 32px;
+    gap: 75px;
   }
 }
 @media (min-width: 1024px) {
@@ -1900,6 +1900,9 @@ header.open-menu .toggle-menu .close-icon {
   display: flex;
   flex-direction: column;
   gap: 16px;
+  width: 100%;
+  max-width: 1022px;
+  margin: 0 auto;
 }
 @media (min-width: 768px) {
   .schedule ul {
