@@ -2466,18 +2466,21 @@ body {
   position: relative;
   overflow: hidden;
   padding: 32px 12px;
+  padding-bottom: 56px !important;
   color: #ffffff;
 }
 @media (min-width: 768px) {
   .songs-section {
     gap: 32px;
     padding: 48px 16px;
+    padding-bottom: 56px !important;
   }
 }
 @media (min-width: 1280px) {
   .songs-section {
     gap: 40px;
     padding: 56px 20px;
+    padding-bottom: 56px !important;
   }
 }
 .songs-section > h2 {
@@ -2586,6 +2589,11 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
+}
+@media screen and (max-width: 512px) {
+  .songs-vinyl {
+    margin: 32px auto -65%;
+  }
 }
 @media (min-width: 768px) {
   .songs-vinyl {
