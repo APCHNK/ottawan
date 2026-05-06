@@ -1,0 +1,120 @@
+.schedule {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding: 30px 0;
+  color: $color-text;
+
+  @include media-tablet {
+    gap: 32px;
+  }
+
+  @include media-laptop {
+    padding: 60px 0;
+  }
+
+  > h2 {
+    color: $color-text;
+    font-weight: 600;
+  }
+
+  ul {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+
+    @include media-tablet {
+      gap: 24px;
+    }
+
+    li {
+      align-items: center;
+      display: flex;
+      gap: 16px;
+
+      @include media-tablet {
+        gap: 24px;
+      }
+
+      img {
+        flex-shrink: 0;
+        height: 91px;
+        object-fit: cover;
+        width: 91px;
+        border-radius: 12px;
+
+        @include media-tablet {
+          height: 140px;
+          width: 140px;
+          border-radius: 16px;
+        }
+      }
+
+      .info {
+        display: flex;
+        flex-direction: column;
+        flex-grow: 1;
+        font-family: $font-sans;
+        gap: 12px;
+
+        @include media-tablet {
+          align-items: center;
+          flex-direction: row;
+          gap: 24px;
+          justify-content: space-between;
+          width: calc(100% - 164px);
+        }
+
+        > div {
+          display: flex;
+          flex-direction: column;
+          gap: 6px;
+
+          @include media-tablet {
+            gap: 10px;
+          }
+        }
+
+        h3 {
+          font-family: $font-sans;
+          color: $color-text;
+          font-size: 18px;
+          font-weight: 600;
+          line-height: 24px;
+
+          @include media-tablet {
+            font-size: 32px;
+            line-height: 40px;
+          }
+        }
+
+        span {
+          display: block;
+          font-family: $font-meta;
+          color: $color-text;
+          font-size: 14px;
+          font-weight: 400;
+          line-height: 20px;
+
+          @include media-tablet {
+            font-size: 16px;
+            line-height: 22px;
+          }
+        }
+
+        button {
+          width: fit-content;
+          padding: 12px 22px;
+          font-size: 14px;
+          line-height: 20px;
+        }
+      }
+    }
+    hr {
+      background: $color-divider;
+      border: 0;
+      height: 1px;
+      margin: 0;
+    }
+  }
+}

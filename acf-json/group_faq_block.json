@@ -1,0 +1,52 @@
+{
+    "key": "group_faq_block",
+    "title": "[Content Block] FAQ",
+    "fields": [
+        {
+            "key": "field_faq_title",
+            "label": "Title",
+            "name": "title",
+            "type": "text",
+            "default_value": "FAQ"
+        },
+        {
+            "key": "field_faq_items",
+            "label": "Questions",
+            "name": "questions",
+            "type": "repeater",
+            "layout": "block",
+            "button_label": "Add Question",
+            "sub_fields": [
+                {
+                    "key": "field_faq_question",
+                    "label": "Question",
+                    "name": "question",
+                    "type": "text"
+                },
+                {
+                    "key": "field_faq_answer",
+                    "label": "Answer",
+                    "name": "answer",
+                    "type": "wysiwyg",
+                    "tabs": "all",
+                    "toolbar": "full",
+                    "media_upload": 0,
+                    "delay": 0
+                }
+            ]
+        }
+    ],
+    "location": [
+        [
+            {
+                "param": "post_type",
+                "operator": "==",
+                "value": "post"
+            }
+        ]
+    ],
+    "active": false,
+    "show_in_rest": 0,
+    "show_in_graphql": 0,
+    "modified": 1711900000
+}

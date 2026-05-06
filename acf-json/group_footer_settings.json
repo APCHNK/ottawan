@@ -1,0 +1,36 @@
+{
+    "key": "group_footer_settings",
+    "title": "Footer",
+    "fields": [
+        {
+            "key": "field_footer_copyright",
+            "label": "Copyright Text",
+            "name": "footer_copyright",
+            "type": "text",
+            "default_value": "Boney M Liz Mitchell. All Right Reserved"
+        },
+        {
+            "key": "field_footer_email",
+            "label": "Email",
+            "name": "footer_email",
+            "type": "email",
+            "default_value": "book.boneym@gmail.com"
+        }
+    ],
+    "location": [
+        [
+            {
+                "param": "options_page",
+                "operator": "==",
+                "value": "footer-settings"
+            }
+        ]
+    ],
+    "menu_order": 0,
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "active": true,
+    "modified": 1711900002
+}

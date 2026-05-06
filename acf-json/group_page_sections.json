@@ -1,0 +1,192 @@
+{
+    "key": "group_page_sections",
+    "title": "Page Sections",
+    "fields": [
+        {
+            "key": "field_page_flex_content",
+            "label": "Sections",
+            "name": "page_sections",
+            "type": "flexible_content",
+            "instructions": "Add content sections below the page content",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "layouts": {
+                "layout_ps_headline": {
+                    "key": "layout_ps_headline",
+                    "name": "headline_content",
+                    "label": "Headline Content",
+                    "display": "block",
+                    "sub_fields": [
+                        {
+                            "key": "field_ps_headline_clone",
+                            "label": "headline_content",
+                            "name": "headline_content",
+                            "type": "clone",
+                            "clone": ["group_66cb4114d6425"],
+                            "display": "seamless",
+                            "layout": "block",
+                            "prefix_label": 0,
+                            "prefix_name": 0
+                        }
+                    ]
+                },
+                "layout_ps_player": {
+                    "key": "layout_ps_player",
+                    "name": "player",
+                    "label": "Player",
+                    "display": "block",
+                    "sub_fields": [
+                        {
+                            "key": "field_ps_player_under_title",
+                            "label": "Under Title",
+                            "name": "under_title",
+                            "type": "true_false",
+                            "instructions": "Place this player section right below the page title",
+                            "default_value": 0,
+                            "ui": 1
+                        },
+                        {
+                            "key": "field_ps_player_clone",
+                            "label": "player",
+                            "name": "player",
+                            "type": "clone",
+                            "clone": ["group_66f5ae60da1df"],
+                            "display": "seamless",
+                            "layout": "block",
+                            "prefix_label": 0,
+                            "prefix_name": 0
+                        }
+                    ]
+                },
+                "layout_ps_videos": {
+                    "key": "layout_ps_videos",
+                    "name": "videos",
+                    "label": "Videos",
+                    "display": "block",
+                    "sub_fields": [
+                        {
+                            "key": "field_ps_videos_clone",
+                            "label": "videos",
+                            "name": "videos",
+                            "type": "clone",
+                            "clone": ["group_66cb4190edbdb"],
+                            "display": "seamless",
+                            "layout": "block",
+                            "prefix_label": 0,
+                            "prefix_name": 0
+                        }
+                    ]
+                },
+                "layout_ps_schedule": {
+                    "key": "layout_ps_schedule",
+                    "name": "schedule",
+                    "label": "Schedule",
+                    "display": "block",
+                    "sub_fields": [
+                        {
+                            "key": "field_ps_schedule_clone",
+                            "label": "schedule",
+                            "name": "schedule",
+                            "type": "clone",
+                            "clone": ["group_66e8708825e1d"],
+                            "display": "seamless",
+                            "layout": "block",
+                            "prefix_label": 0,
+                            "prefix_name": 0
+                        }
+                    ]
+                },
+                "layout_ps_booking": {
+                    "key": "layout_ps_booking",
+                    "name": "book_request",
+                    "label": "Booking Video",
+                    "display": "block",
+                    "sub_fields": [
+                        {
+                            "key": "field_ps_booking_clone",
+                            "label": "book_request",
+                            "name": "book_request",
+                            "type": "clone",
+                            "clone": ["group_66cb41ef35297"],
+                            "display": "seamless",
+                            "layout": "block",
+                            "prefix_label": 0,
+                            "prefix_name": 0
+                        }
+                    ]
+                },
+                "layout_ps_songs": {
+                    "key": "layout_ps_songs",
+                    "name": "songs",
+                    "label": "Songs",
+                    "display": "block",
+                    "sub_fields": [
+                        {
+                            "key": "field_ps_songs_clone",
+                            "label": "songs",
+                            "name": "songs",
+                            "type": "clone",
+                            "clone": ["group_songs_block"],
+                            "display": "seamless",
+                            "layout": "block",
+                            "prefix_label": 0,
+                            "prefix_name": 0
+                        }
+                    ]
+                },
+                "layout_ps_faq": {
+                    "key": "layout_ps_faq",
+                    "name": "faq",
+                    "label": "FAQ",
+                    "display": "block",
+                    "sub_fields": [
+                        {
+                            "key": "field_ps_faq_clone",
+                            "label": "faq",
+                            "name": "faq",
+                            "type": "clone",
+                            "clone": ["group_faq_block"],
+                            "display": "seamless",
+                            "layout": "block",
+                            "prefix_label": 0,
+                            "prefix_name": 0
+                        }
+                    ]
+                }
+            },
+            "button_label": "Add Section",
+            "min": "",
+            "max": ""
+        }
+    ],
+    "location": [
+        [
+            {
+                "param": "post_type",
+                "operator": "==",
+                "value": "page"
+            },
+            {
+                "param": "page_template",
+                "operator": "!=",
+                "value": "frontpage-template"
+            }
+        ]
+    ],
+    "menu_order": 10,
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": "",
+    "active": true,
+    "description": "Add flexible content sections to any page",
+    "show_in_rest": 0,
+    "show_in_graphql": 0,
+    "modified": 1711900000
+}

@@ -1,0 +1,318 @@
+{
+    "key": "group_66cb3b3ff0938",
+    "title": "Content Block",
+    "fields": [
+        {
+            "key": "field_66cb3b4b03df1",
+            "label": "Style",
+            "name": "style",
+            "type": "select",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "show_in_graphql": 1,
+            "choices": {
+                "light": "Light",
+                "dark": "Dark",
+                "white": "White"
+            },
+            "default_value": "light",
+            "allow_null": 0,
+            "multiple": 0,
+            "ui": 0,
+            "return_format": "value",
+            "ajax": 0,
+            "placeholder": ""
+        },
+        {
+            "key": "field_66cb3ba803df2",
+            "label": "Content",
+            "name": "content",
+            "type": "flexible_content",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "show_in_graphql": 1,
+            "layouts": {
+                "layout_66cb3eaa0ec70": {
+                    "key": "layout_66cb3eaa0ec70",
+                    "name": "book_request",
+                    "label": "book_request",
+                    "display": "block",
+                    "sub_fields": [
+                        {
+                            "key": "field_66cb4396a96c1",
+                            "label": "book_request",
+                            "name": "book_request",
+                            "type": "clone",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "show_in_graphql": 1,
+                            "clone": [
+                                "group_66cb41ef35297"
+                            ],
+                            "display": "seamless",
+                            "layout": "",
+                            "prefix_label": 0,
+                            "prefix_name": 0
+                        }
+                    ],
+                    "min": "",
+                    "max": ""
+                },
+                "layout_66cb43f3a96c4": {
+                    "key": "layout_66cb43f3a96c4",
+                    "name": "contact",
+                    "label": "contact",
+                    "display": "block",
+                    "sub_fields": [
+                        {
+                            "key": "field_66cb43f3a96c5",
+                            "label": "contact",
+                            "name": "contact",
+                            "type": "clone",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "show_in_graphql": 1,
+                            "clone": [
+                                "group_66cb429649c8a"
+                            ],
+                            "display": "seamless",
+                            "layout": "block",
+                            "prefix_label": 0,
+                            "prefix_name": 0
+                        }
+                    ],
+                    "min": "",
+                    "max": ""
+                },
+                "layout_66cb4438a96c6": {
+                    "key": "layout_66cb4438a96c6",
+                    "name": "headline_content",
+                    "label": "headline_content",
+                    "display": "block",
+                    "sub_fields": [
+                        {
+                            "key": "field_66cb4476a96c7",
+                            "label": "headline_content",
+                            "name": "headline_content",
+                            "type": "clone",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "show_in_graphql": 1,
+                            "clone": [
+                                "group_66cb4114d6425"
+                            ],
+                            "display": "seamless",
+                            "layout": "block",
+                            "prefix_label": 0,
+                            "prefix_name": 0
+                        }
+                    ],
+                    "min": "",
+                    "max": ""
+                },
+                "layout_66cb44a6a96c8": {
+                    "key": "layout_66cb44a6a96c8",
+                    "name": "videos",
+                    "label": "videos",
+                    "display": "block",
+                    "sub_fields": [
+                        {
+                            "key": "field_66cb44ada96c9",
+                            "label": "videos",
+                            "name": "videos",
+                            "type": "clone",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "show_in_graphql": 1,
+                            "clone": [
+                                "group_66cb4190edbdb"
+                            ],
+                            "display": "seamless",
+                            "layout": "block",
+                            "prefix_label": 0,
+                            "prefix_name": 0
+                        }
+                    ],
+                    "min": "",
+                    "max": ""
+                },
+                "layout_66e871637b73c": {
+                    "key": "layout_66e871637b73c",
+                    "name": "schedule",
+                    "label": "schedule",
+                    "display": "block",
+                    "sub_fields": [
+                        {
+                            "key": "field_66e871637b73d",
+                            "label": "schedule",
+                            "name": "schedule",
+                            "type": "clone",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "clone": [
+                                "group_66e8708825e1d"
+                            ],
+                            "display": "seamless",
+                            "layout": "block",
+                            "prefix_label": 0,
+                            "prefix_name": 0
+                        }
+                    ],
+                    "min": "",
+                    "max": ""
+                },
+                "layout_66f5b0430b15a": {
+                    "key": "layout_66f5b0430b15a",
+                    "name": "player",
+                    "label": "player",
+                    "display": "block",
+                    "sub_fields": [
+                        {
+                            "key": "field_66f5b0430b15b",
+                            "label": "player",
+                            "name": "player",
+                            "type": "clone",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "clone": [
+                                "group_66f5ae60da1df"
+                            ],
+                            "display": "seamless",
+                            "layout": "block",
+                            "prefix_label": 0,
+                            "prefix_name": 0
+                        }
+                    ],
+                    "min": "",
+                    "max": ""
+                },
+                "layout_songs_001": {
+                    "key": "layout_songs_001",
+                    "name": "songs",
+                    "label": "songs",
+                    "display": "block",
+                    "sub_fields": [
+                        {
+                            "key": "field_songs_clone_001",
+                            "label": "songs",
+                            "name": "songs",
+                            "type": "clone",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "clone": [
+                                "group_songs_block"
+                            ],
+                            "display": "seamless",
+                            "layout": "block",
+                            "prefix_label": 0,
+                            "prefix_name": 0
+                        }
+                    ],
+                    "min": "",
+                    "max": ""
+                },
+                "layout_faq_001": {
+                    "key": "layout_faq_001",
+                    "name": "faq",
+                    "label": "FAQ",
+                    "display": "block",
+                    "sub_fields": [
+                        {
+                            "key": "field_faq_clone_001",
+                            "label": "faq",
+                            "name": "faq",
+                            "type": "clone",
+                            "clone": ["group_faq_block"],
+                            "display": "seamless",
+                            "layout": "block",
+                            "prefix_label": 0,
+                            "prefix_name": 0
+                        }
+                    ],
+                    "min": "",
+                    "max": ""
+                }
+            },
+            "button_label": "Add Component",
+            "min": 1,
+            "max": ""
+        }
+    ],
+    "location": [
+        [
+            {
+                "param": "post_type",
+                "operator": "==",
+                "value": "post"
+            }
+        ]
+    ],
+    "menu_order": 0,
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": "",
+    "active": false,
+    "description": "",
+    "show_in_rest": 0,
+    "show_in_graphql": 0,
+    "graphql_field_name": "contentBlock",
+    "map_graphql_types_from_location_rules": 0,
+    "graphql_types": "",
+    "modified": 1727377539
+}

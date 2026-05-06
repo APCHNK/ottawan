@@ -1,0 +1,62 @@
+.page-spacing {
+  background: transparent;
+  color: $color-white;
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+
+  @include media-tablet {
+    gap: 60px;
+  }
+
+  @include media-laptop-l {
+    gap: 120px;
+  }
+}
+
+.spacing-xs {
+  padding-bottom: 12px;
+  padding-top: 12px;
+
+  @include media-tablet {
+    padding-bottom: 16px;
+    padding-top: 16px;
+  }
+}
+
+.spacing-md {
+  padding-bottom: 25px;
+  padding-top: 25px;
+
+  @include media-tablet {
+    padding-bottom: 30px;
+    padding-top: 30px;
+  }
+}
+
+.spacing-lg {
+  padding-bottom: 25px;
+  padding-top: 25px;
+
+  @include media-tablet {
+    padding-bottom: 30px;
+    padding-top: 30px;
+  }
+
+  @include media-laptop-l {
+    padding-bottom: 60px;
+    padding-top: 60px;
+  }
+}
+
+.gap-lg {
+  gap: 25px;
+
+  @include media-tablet {
+    gap: 60px;
+  }
+
+  @include media-laptop-l {
+    gap: 120px;
+  }
+}

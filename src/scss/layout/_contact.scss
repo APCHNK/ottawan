@@ -1,0 +1,127 @@
+.contact {
+  background-color: $color-contact;
+  border-radius: $border-radius-s;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  position: relative;
+  width: 100%;
+
+  @include media-tablet {
+    flex-direction: row;
+  }
+
+  // Internal pages share the same pink surface as the front-page sections,
+  // so the contact card keeps its solid `$color-contact` background.
+
+  > picture {
+    display: contents;
+  }
+
+  img {
+    display: block;
+    height: 300px;
+    object-fit: cover;
+    object-position: top;
+    width: 100%;
+
+    @include media-tablet {
+      height: auto;
+      width: 320px;
+    }
+    @include media-laptop-l {
+      width: 435px;
+    }
+  }
+
+  .action {
+    display: flex;
+    flex-direction: column;
+    font-family: $font-sans;
+    gap: 25px;
+    padding: 32px 24px;
+    text-align: center;
+    background: $color-contact;
+    color: $color-white;
+    justify-content: center;
+
+    @include media-tablet {
+      padding: 60px;
+      text-align: left;
+    }
+
+    @include media-laptop-l {
+      padding: 80px;
+      max-width: 66%;
+    }
+
+    h2 {
+      color: $color-white;
+      font-weight: 600;
+      @media (min-width: 1280px) {
+        font-size: 42px;
+        line-height: 52px;
+      }
+    }
+    div {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+
+      @include media-tablet {
+        text-align: left;
+      }
+
+      p {
+        color: $color-white;
+        font-family: $font-sans;
+        font-size: 16px;
+        font-weight: 400;
+        line-height: 26px;
+
+        @include media-laptop-l {
+          font-size: 18px;
+          line-height: 30px;
+        }
+
+        a {
+          color: inherit;
+          text-decoration: underline;
+          transition: 0.3s;
+          &:hover {
+            color: $color-primary;
+          }
+        }
+      }
+    }
+
+    .btns {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin: 0 auto;
+      width: 216px;
+
+      @include media-tablet {
+        width: 100%;
+        margin: 0;
+      }
+
+      @include media-laptop-l {
+        flex-direction: row;
+        gap: 20px;
+      }
+
+      button,
+      a {
+        display: inline-flex;
+        flex: 1;
+        font-family: $font-sans;
+        padding: 16px 24px;
+        font-size: 16px;
+        line-height: 24px;
+        border-radius: $border-radius-pill;
+      }
+    }
+  }
+}

@@ -1,0 +1,119 @@
+// Legacy booking (kept for backwards compat)
+.booking {
+  background-color: $color-dark;
+  border-radius: 20px;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  position: relative;
+  width: 100%;
+
+  img {
+    height: auto;
+    width: 100%;
+  }
+
+  .action {
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+    padding: 25px;
+    text-align: center;
+
+    h2 {
+      color: $color-white;
+    }
+    p {
+      color: $color-white;
+      font-weight: 700;
+    }
+
+    .btns {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin: 0 auto;
+      width: 216px;
+    }
+  }
+}
+.columnar:has(.booking-hero) {
+  z-index: 2;
+}
+// Booking hero with video
+.booking-hero {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+
+  &__content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+    max-width: 700px;
+    transition: transform 0.1s ease-out, opacity 0.1s ease-out;
+
+    h2 {
+      font-size: 28px;
+      font-weight: 800;
+
+      @include media-tablet {
+        font-size: 40px;
+      }
+
+      @include media-laptop {
+        font-size: 48px;
+      }
+    }
+
+    p {
+      opacity: 0.8;
+      max-width: 550px;
+    }
+  }
+
+  &__video {
+    width: 90%;
+    max-width: 100%;
+    border-radius: 24px;
+    overflow: hidden;
+    height: 300px;
+    transition: width 0.1s ease-out, border-radius 0.1s ease-out;
+
+    @include media-tablet {
+      width: 80%;
+      border-radius: 34px;
+      height: 55vh;
+    }
+
+    @include media-laptop {
+      width: 70%;
+      border-radius: 40px;
+      height: 65vh;
+    }
+
+    @media (max-width: 480px) {
+      height: 250px;
+      border-radius: 16px;
+      width: 95%;
+    }
+
+    mux-player {
+      width: 100%;
+      height: 100%;
+      display: block;
+      --controls: none;
+      --media-object-fit: cover;
+      --media-object-position: center;
+
+      // Safari fix
+      video {
+        object-fit: cover;
+        width: 100%;
+        height: 100%;
+      }
+    }
+  }
+}

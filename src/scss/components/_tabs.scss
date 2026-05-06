@@ -1,0 +1,50 @@
+// Tab pills (Social Media: Instagram / Facebook / Youtube)
+.tab-list {
+  display: inline-flex;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+  width: 100%;
+
+  @include media-tablet {
+    gap: 24px;
+  }
+}
+
+.tab-item {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 20px;
+  font-family: $font-sans;
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 24px;
+  color: $color-text;
+  background: transparent;
+  border: 1px solid transparent;
+  border-radius: $border-radius-pill;
+  cursor: pointer;
+  transition: background 0.25s ease, color 0.25s ease;
+
+  @include media-tablet {
+    font-size: 20px;
+    padding: 10px 22px;
+  }
+
+  &:hover {
+    color: $color-primary-hover;
+  }
+
+  &.is-active,
+  &[aria-selected="true"] {
+    background: $color-primary;
+    color: $color-white;
+    border-radius: $border-radius-pill;
+
+    &:hover {
+      background: $color-primary-hover;
+      color: $color-white;
+    }
+  }
+}

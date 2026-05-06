@@ -1,0 +1,82 @@
+// Colors — Ottawan 5G Golden Copy palette (Figma node 820:185)
+$color-primary: #E91E63;         // pink/magenta accent — buttons, active states, scrubber
+$color-primary-hover: #C2185B;   // deeper magenta for hover
+$color-primary-deep: #A30055;    // deeper magenta — dropdown menu surface
+
+$color-dark: #000000;            // banner overlay + Golden Hits section
+$color-card: #1A0050;            // deep purple card surface (player, hits & videos)
+$color-card-deep: #110036;       // even deeper purple (active row tint)
+$color-contact: #190D70;         // dark blue/purple — Contact section background
+$color-bg: #FBE8EE;              // light pink page background
+$color-bg-deep: #F3E1EE;         // slightly deeper pink (footer strip)
+$color-text: #000000;            // body text on light bg
+
+$color-secondary: rgba(255, 255, 255, 0.16);
+$color-secondary-hover: rgba(255, 255, 255, 0.24);
+$color-muted: rgba(0, 0, 0, 0.55);
+$color-muted-on-dark: rgba(255, 255, 255, 0.55);
+$color-divider: rgba(0, 0, 0, 0.12);
+$color-divider-on-dark: rgba(255, 255, 255, 0.12);
+
+$color-light: #FBE8EE;           // alias for partials referencing $color-light
+$color-white: #ffffff;
+
+// Internal page (non-front) dark gradient — kept for any non-front routes
+$color-page-grad-bottom: #1A0050;
+$color-page-grad-top:    #110036;
+
+// Breakpoints (min width)
+$mobile: 460px;
+$tablet: 768px;
+$laptop: 1024px;
+$laptop-l: 1280px;
+$desktop: 1440px;
+$desktop-l: 1920px;
+
+@mixin media-mobile {
+  @media (min-width: $mobile) {
+    @content;
+  }
+}
+
+@mixin media-tablet {
+  @media (min-width: $tablet) {
+    @content;
+  }
+}
+
+@mixin media-laptop {
+  @media (min-width: $laptop) {
+    @content;
+  }
+}
+
+@mixin media-laptop-l {
+  @media (min-width: $laptop-l) {
+    @content;
+  }
+}
+
+@mixin media-desktop {
+  @media (min-width: $desktop) {
+    @content;
+  }
+}
+
+@mixin media-desktop-l {
+  @media (min-width: $desktop-l) {
+    @content;
+  }
+}
+
+// Border-radius
+$border-radius-btn: 8px;
+$border-radius-btn-lg: 12px;
+$border-radius-pill: 100px;
+$border-radius-s: 20px;
+$border-radius-sm: 24px;
+$border-radius-md: 32px;
+$border-radius: 34px;
+$border-radius-lg: 40px;
+
+$border-radius-rounded: 50%;

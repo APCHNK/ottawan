@@ -1,0 +1,77 @@
+{
+    "key": "group_songs_block",
+    "title": "[Content Block] Songs",
+    "fields": [
+        {
+            "key": "field_songs_section_title",
+            "label": "Title",
+            "name": "title",
+            "type": "text",
+            "default_value": "Songs"
+        },
+        {
+            "key": "field_songs_items",
+            "label": "Cards",
+            "name": "cards",
+            "type": "repeater",
+            "layout": "block",
+            "button_label": "Add Card",
+            "sub_fields": [
+                {
+                    "key": "field_songs_item_image",
+                    "label": "Image",
+                    "name": "image",
+                    "type": "image",
+                    "return_format": "array",
+                    "preview_size": "medium",
+                    "library": "all"
+                },
+                {
+                    "key": "field_songs_item_title",
+                    "label": "Title",
+                    "name": "title",
+                    "type": "text",
+                    "wrapper": { "width": "50" }
+                },
+                {
+                    "key": "field_songs_item_description",
+                    "label": "Description",
+                    "name": "description",
+                    "type": "textarea",
+                    "rows": 2,
+                    "new_lines": "br",
+                    "wrapper": { "width": "50" }
+                },
+                {
+                    "key": "field_songs_item_url",
+                    "label": "URL",
+                    "name": "url",
+                    "type": "url"
+                }
+            ]
+        },
+        {
+            "key": "field_songs_vinyl_image",
+            "label": "Vinyl Center Photo",
+            "name": "vinyl_image",
+            "type": "image",
+            "return_format": "array",
+            "preview_size": "medium",
+            "library": "all",
+            "instructions": "Optional B&W band photo shown in the center of the vinyl record below the cards (per Figma 5G Golden Copy)."
+        }
+    ],
+    "location": [
+        [
+            {
+                "param": "post_type",
+                "operator": "==",
+                "value": "post"
+            }
+        ]
+    ],
+    "active": false,
+    "show_in_rest": 0,
+    "show_in_graphql": 0,
+    "modified": 1711800000
+}

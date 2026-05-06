@@ -1,0 +1,156 @@
+.text-block {
+  display: flex;
+  flex-direction: column;
+  font-family: $font-sans;
+  font-size: 16px;
+  font-weight: 400;
+  gap: 20px;
+  width: 100%;
+  padding: 20px 0;
+  color: $color-text;
+  align-items: flex-start;
+
+  @include media-tablet {
+    gap: 30px;
+  }
+
+  @include media-laptop-l {
+    flex-direction: row;
+    gap: 40px;
+    justify-content: space-between;
+    align-items: flex-start;
+  }
+
+  .headline {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    position: relative;
+    isolation: isolate;
+    align-self: flex-start;
+
+    @include media-laptop-l {
+      width: 390px;
+      min-height: 230px;
+      justify-content: center;
+      padding: 28px 56px 28px 0;
+    }
+
+    // Decorative pill-shape behind the headline — Figma 5G Golden Copy
+    // node 820:842 / 820:848 ("Rectangle 239" / "Rectangle 240"). Extends
+    // off the left edge of the viewport with a rounded right cap that
+    // overhangs slightly past the headline column.
+    // Decorative pill — Figma 5G Golden Copy node 820:842 / 820:848.
+    // Desktop only; on tablet/mobile the layout is stacked and the pill
+    // would dominate the section, so it's hidden there.
+    @include media-laptop-l {
+      &::before {
+        content: "";
+        position: absolute;
+        z-index: -1;
+        top: 0;
+        bottom: 0;
+        left: -100vw;
+        right: 0;
+        background: #F0D8E5;
+        border-radius: 0 9999px 9999px 0;
+      }
+    }
+
+    h2 {
+      font-family: $font-sans;
+      color: $color-text;
+      font-weight: 700;
+    }
+
+    span {
+      font-family: $font-sans;
+      color: $color-text;
+      font-size: 16px;
+      font-weight: 500;
+      line-height: 24px;
+
+      @include media-laptop-l {
+        font-size: 20px;
+        line-height: 30px;
+      }
+    }
+  }
+
+  .description {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+
+    @include media-tablet {
+        gap: 20px;
+    }
+
+    @include media-laptop-l {
+        gap: 25px;
+        width: 737px;
+    }
+
+    p {
+      font-family: $font-sans;
+      color: $color-text;
+      font-size: 14px;
+      font-weight: 400;
+      line-height: 24px;
+
+      @include media-tablet {
+        font-size: 16px;
+        line-height: 28px;
+      }
+    }
+
+    img {
+      border-radius: $border-radius-s;
+      height: auto;
+      width: 100%;
+
+      @include media-tablet {
+        border-radius: $border-radius-md;
+      }
+    }
+  }
+}
+
+.description-slider {
+  font-family: $font-sans;
+  color: $color-text;
+  width: 100%;
+
+  @include media-laptop-l {
+    width: 737px;
+  }
+
+  .swiper-slide {
+    p {
+      font-family: $font-sans;
+      color: $color-text;
+      font-size: 14px;
+      font-weight: 400;
+      line-height: 24px;
+
+      @include media-tablet {
+        font-size: 16px;
+        line-height: 28px;
+      }
+      a{
+        color: $color-text;
+        text-decoration: underline;
+      }
+    }
+
+    img {
+      border-radius: $border-radius-s;
+      height: auto;
+      width: 100%;
+
+      @include media-tablet {
+        border-radius: $border-radius-md;
+      }
+    }
+  }
+}

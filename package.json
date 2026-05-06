@@ -1,0 +1,17 @@
+{
+  "name": "twentytwentyfive",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "webpack --mode development --watch",
+    "build": "webpack --mode production"
+  },
+  "devDependencies": {
+    "css-loader": "^7.1.4",
+    "mini-css-extract-plugin": "^2.10.1",
+    "sass": "^1.98.0",
+    "sass-loader": "^16.0.7",
+    "webpack": "^5.105.4",
+    "webpack-cli": "^7.0.2"
+  }
+}

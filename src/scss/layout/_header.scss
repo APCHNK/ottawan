@@ -1,0 +1,562 @@
+@keyframes fadeInMobileMenu {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+header {
+  left: 0;
+  position: absolute;
+  top: 0;
+  width: 100%;
+  z-index: 3;
+
+  &.open-menu {
+    background-color: $color-dark;
+    position: fixed;
+
+    @include media-laptop {
+      position: absolute;
+    }
+
+    .toggle-menu {
+      .burger-icon { display: none; }
+      .close-icon { display: block; }
+    }
+  }
+}
+.header-wrap {
+  align-items: center;
+  display: flex;
+  justify-content: space-between;
+  position: relative;
+  width: 100%;
+
+  .toggle-menu {
+    cursor: pointer;
+    height: 32px;
+    width: 32px;
+    img{
+      display: block;
+      height: 100%;
+      width: 100%;
+    }
+
+    @include media-tablet {
+      height: 32px;
+      width: 32px;
+    }
+
+    @include media-laptop {
+      display: none;
+    }
+
+    .close-icon {
+      display: none;
+    }
+  }
+
+  .menu {
+    align-items: center;
+    background-color: $color-dark;
+    bottom: 0;
+    display: none;
+    flex-direction: column;
+    justify-content: flex-start;
+    left: 0;
+    height: calc(100% - 77px);
+    padding-top: 60px;
+    position: fixed;
+
+    @include media-tablet {
+      justify-content: center;
+      padding-top: 0;
+    }
+    width: 100%;
+    z-index: 3;
+    opacity: 0;
+    transition: opacity 0.35s ease;
+
+    &.open {
+      display: flex;
+      animation: fadeInMobileMenu 0.35s ease forwards;
+      overflow-y: auto;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    @include media-laptop {
+      background-color: transparent;
+      display: flex;
+      justify-content: flex-end;
+      height: auto;
+      position: relative;
+      opacity: 1;
+    }
+
+    ul {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+      justify-content: center;
+      padding: 0 16px;
+      width: 100%;
+
+      @include media-tablet {
+        max-width: 455px;
+      }
+      @include media-laptop {
+        flex-direction: row;
+        justify-content: flex-end;
+        max-width: none;
+
+        &:has(> li > a:hover) > li > a.current:not(:hover) {
+          background: transparent;
+          color: $color-white;
+
+          .submenu-indicator {
+            color: $color-white;
+          }
+        }
+      }
+
+      li {
+        display: flex;
+        flex-direction: column;
+        gap: 0;
+        text-align: left;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.16);
+
+        &:last-child {
+          border-bottom: none;
+        }
+
+        @include media-laptop {
+          border-bottom: none;
+          text-align: center;
+        }
+
+        hr {
+          display: none;
+        }
+
+        a {
+          color: #FFFFFF;
+          font-family: $font-sans;
+          font-size: 20px;
+          font-weight: 700;
+          transition: 0.3s;
+          padding: 16px 0;
+
+          @include media-tablet {
+            font-size: 28px;
+            padding: 20px 0;
+          }
+
+          @include media-laptop {
+            border-radius: $border-radius-btn;
+            color: $color-white;
+            font-family: $font-sans;
+            font-size: 16px;
+            font-weight: 500;
+            line-height: 16px;
+            padding: 8px 16px;
+          }
+
+          &.current {
+            color: $color-primary;
+
+            @include media-laptop {
+              background: $color-primary;
+              border-radius: $border-radius-pill;
+              color: $color-white;
+              font-weight: 600;
+
+              &:hover {
+                color: $color-white;
+                background: $color-primary-hover;
+              }
+            }
+          }
+
+          &:hover {
+            color: $color-primary;
+
+            @include media-laptop {
+              background: $color-primary;
+              border-radius: $border-radius-pill;
+              color: $color-white;
+            }
+          }
+        }
+
+        // Desktop submenu styles
+        &.has-submenu {
+          position: relative;
+
+          // Chevron always follows the parent <a> text colour:
+          //   default <a>  → white  → white chevron
+          //   hover/current → black on yellow pill → black chevron
+          .submenu-indicator {
+            color: inherit;
+          }
+
+          @include media-laptop {
+            > a {
+              display: inline-flex;
+              align-items: center;
+              gap: 6px;
+
+              .submenu-indicator {
+                font-size: 10px;
+                line-height: 1;
+                transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1),
+                            opacity 0.3s ease,
+                            color 0.2s ease;
+                opacity: 0.7;
+              }
+            }
+
+            // Keep the parent pill hovered (yellow bg + black text +
+            // black chevron) while the dropdown stays open. Without
+            // this the cursor moving to a dropdown item drops <a>:hover
+            // and the chevron flips back to white on a yellow pill.
+            &:hover > a {
+              background: $color-primary;
+              color: $color-dark;
+            }
+
+            &:hover {
+              > a .submenu-indicator {
+                transform: rotate(180deg);
+                opacity: 1;
+              }
+
+              > .submenu {
+                opacity: 1;
+                visibility: visible;
+                transform: translateY(0) scale(1);
+
+                &::before {
+                  opacity: 1;
+                }
+
+                li {
+                  opacity: 1;
+                  transform: translateY(0);
+                }
+              }
+            }
+          }
+        }
+
+        .submenu {
+          // Mobile styles only (< 1024px)
+          @media (max-width: 1023px) {
+            display: none;
+            flex-direction: column;
+            gap: 0;
+            padding: 0 16px;
+            margin-top: 10px;
+            margin-bottom: 10px;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s ease-in-out,
+                        margin 0.5s ease-in-out,
+                        opacity 0.45s ease-in-out;
+            text-align: left;
+            opacity: 0;
+
+            li {
+              display: flex;
+              flex-direction: column;
+              gap: 10px;
+              align-items: flex-start;
+              width: 100%;
+              transform: translateY(-12px);
+              opacity: 0;
+              transition: transform 0.45s ease-out,
+                          opacity 0.45s ease-out;
+              transition-delay: 0s;
+
+              &:nth-child(1) { transition-delay: 0.08s; }
+              &:nth-child(2) { transition-delay: 0.12s; }
+              &:nth-child(3) { transition-delay: 0.16s; }
+              &:nth-child(4) { transition-delay: 0.20s; }
+              &:nth-child(5) { transition-delay: 0.24s; }
+              &:nth-child(6) { transition-delay: 0.28s; }
+              &:nth-child(7) { transition-delay: 0.32s; }
+
+              a {
+                font-size: 16px;
+                font-weight: 500;
+                opacity: 0.75;
+                transition: all 0.3s ease;
+                color: #fff;
+                padding: 8px 0;
+                border-radius: 0;
+                text-align: left;
+
+                &.current {
+                  opacity: 1;
+                  color: $color-primary;
+                  font-weight: 600;
+                }
+
+                &:hover {
+                  opacity: 1;
+                  color: $color-primary;
+                  transform: scale(1.05);
+                }
+              }
+
+              @media (min-width: 768px) {
+                a {
+                  font-size: 28px;
+                }
+              }
+
+              hr {
+                display: none;
+              }
+            }
+          }
+
+          // Desktop styles (>= 1024px) — yellow dropdown card per Figma
+          @include media-laptop {
+            display: flex;
+            flex-direction: column;
+            position: absolute;
+            top: calc(100% + 6px);
+            left: 0;
+            transform: translateY(-10px) scale(0.97);
+            background: $color-primary-deep;
+            border-radius: $border-radius-btn;
+            box-shadow: 0 12px 28px rgba(0, 0, 0, 0.25);
+            min-width: 175px;
+            padding: 8px 0;
+            overflow: hidden;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.25s cubic-bezier(0.4, 0, 0.2, 1),
+                        transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1),
+                        visibility 0.25s;
+            z-index: 100;
+            list-style: none;
+            margin: 0;
+
+            &::before {
+              content: none;
+            }
+
+            li {
+              width: 100%;
+              list-style: none;
+              margin: 0;
+              padding: 0;
+              opacity: 0;
+              transform: translateY(-5px);
+              transition: opacity 0.3s ease, transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+              border-bottom: 1px solid rgba($color-white, 0.18);
+
+              &:nth-child(1) { transition-delay: 0.05s; }
+              &:nth-child(2) { transition-delay: 0.1s; }
+              &:nth-child(3) { transition-delay: 0.15s; }
+              &:nth-child(4) { transition-delay: 0.2s; }
+              &:nth-child(5) { transition-delay: 0.25s; }
+
+              &:last-child {
+                border-bottom: none;
+              }
+
+              a {
+                display: block;
+                width: 100%;
+                padding: 10px 16px;
+                font-family: $font-sans;
+                font-size: 14px;
+                font-weight: 500;
+                line-height: 16px;
+                border-radius: 0;
+                text-align: left;
+                color: $color-white;
+                transition: background 0.2s ease, color 0.2s ease;
+                position: relative;
+                box-sizing: border-box;
+
+                &:hover {
+                  background: rgba($color-white, 0.12);
+                  color: $color-white;
+                }
+
+                &.current {
+                  color: $color-white;
+                  font-weight: 700;
+                }
+              }
+            }
+          }
+        }
+
+        // Show submenu when parent has .expanded class (mobile only)
+        &.expanded {
+          @media (max-width: 1023px) {
+            > .submenu {
+              display: flex;
+              max-height: 500px;
+              opacity: 1;
+
+              li {
+                transform: translateY(0);
+                opacity: 1;
+              }
+            }
+
+            > a:not(.current) {
+              color: $color-primary;
+            }
+          }
+        }
+
+        // Mobile submenu toggle indicator
+        &.has-submenu {
+          position: relative;
+
+          > a {
+            @media (max-width: 1023px) {
+              display: flex;
+              align-items: center;
+              justify-content: flex-start;
+              position: relative;
+            }
+
+            @include media-laptop {
+              display: inline-flex;
+              align-items: center;
+              gap: 6px;
+            }
+
+            .submenu-indicator {
+              @media (max-width: 1023px) {
+                position: absolute;
+                right: 16px;
+                top: 50%;
+                transform: translateY(-50%);
+                width: 40px;
+                height: 40px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                cursor: pointer;
+                font-size: 20px;
+                font-weight: 400;
+                opacity: 0.6;
+                z-index: 1;
+                transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1),
+                            opacity 0.35s ease;
+                color: $color-white !important;
+              }
+
+              @media (max-width: 1023px) and (min-width: 768px) {
+                font-size: 24px;
+                width: 48px;
+                height: 48px;
+              }
+
+              @include media-laptop {
+                font-size: 10px;
+                line-height: 1;
+                transition: transform 0.3s ease;
+                opacity: 0.7;
+              }
+
+              &:hover {
+                opacity: 1;
+              }
+            }
+          }
+
+          &.expanded > a .submenu-indicator {
+            @media (max-width: 1023px) {
+              transform: translateY(-50%) rotate(180deg);
+              opacity: 1;
+            }
+
+            @include media-laptop {
+              transform: rotate(180deg);
+              opacity: 1;
+            }
+          }
+
+          @include media-laptop {
+            &:hover {
+              > a .submenu-indicator {
+                transform: rotate(180deg);
+                opacity: 1;
+              }
+
+              > .submenu {
+                opacity: 1;
+                visibility: visible;
+                transform: translateY(0);
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+// Internal pages (non-front) — header sits over a light pink background
+// instead of a dark hero, so flip its default white text/icons to dark.
+.app-wrapper:has(.page-spacing) {
+  header {
+    @include media-laptop {
+      .header-wrap .menu ul li a {
+        color: $color-text;
+
+        &.current,
+        &:hover {
+          color: $color-white;
+        }
+      }
+    }
+
+    .header-wrap .toggle-menu {
+      .burger-icon path,
+      .close-icon path {
+        stroke: $color-text;
+      }
+    }
+  }
+}
+
+// On internal pages the lang switcher inactive pill needs dark text/border so
+// it stays legible on the light pink surface.
+.app-wrapper:has(.page-spacing) .lang-switcher {
+  a,
+  button {
+    color: $color-text;
+    border-color: rgba(0, 0, 0, 0.18);
+
+    &:hover {
+      background: rgba(0, 0, 0, 0.05);
+      color: $color-text;
+      border-color: rgba(0, 0, 0, 0.32);
+    }
+
+    &.is-active,
+    &.current {
+      color: $color-white;
+      border-color: $color-primary;
+
+      &:hover {
+        color: $color-white;
+        border-color: $color-primary-hover;
+      }
+    }
+  }
+}

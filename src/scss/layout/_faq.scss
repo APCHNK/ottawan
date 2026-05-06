@@ -1,0 +1,133 @@
+.faq {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 30px 0;
+  color: $color-text;
+
+  @include media-tablet {
+    gap: 16px;
+  }
+
+  @include media-laptop {
+    padding: 60px 0;
+  }
+
+  > h2 {
+    font-size: 24px;
+    color: $color-text;
+    font-weight: 600;
+
+    @include media-tablet {
+      font-size: 32px;
+    }
+  }
+
+  &__list {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+  }
+
+  &__item {
+    border-bottom: 1px solid $color-divider;
+
+    &:first-child {
+      border-top: 1px solid $color-divider;
+    }
+
+    &.active {
+      .faq__arrow {
+        transform: rotate(90deg);
+      }
+
+      .faq__question span {
+        color: $color-primary;
+      }
+    }
+  }
+
+  &__question {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    padding: 16px 0;
+    background: none;
+    border: none;
+    cursor: pointer;
+    text-align: left;
+    transition: opacity 0.3s ease;
+
+    @include media-tablet {
+      padding: 18px 0;
+    }
+
+    @include media-laptop {
+      padding: 20px 0;
+    }
+
+    &:hover {
+      opacity: 0.7;
+    }
+
+    span {
+      font-family: $font-sans;
+      font-size: 16px;
+      font-weight: 500;
+      color: $color-text;
+      transition: color 0.3s ease;
+
+      @include media-tablet {
+        font-size: 18px;
+      }
+
+      @include media-laptop {
+        font-size: 20px;
+        line-height: 30px;
+      }
+    }
+  }
+
+  &__arrow {
+    flex-shrink: 0;
+    transition: transform 0.3s ease;
+
+    path {
+      fill: $color-text;
+      stroke: $color-text;
+    }
+  }
+
+  &__answer {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.5s ease, padding 0.5s ease;
+    padding: 0;
+
+    p {
+      font-size: 14px;
+      font-weight: 400;
+      color: $color-muted;
+      line-height: 1.7;
+      padding-bottom: 24px;
+
+      @include media-tablet {
+        font-size: 16px;
+      }
+    }
+  }
+}
+
+// Internal-page variant — same light pink surface as the front page now,
+// so the FAQ uses the same dark-on-light look. Only adjust the title size.
+.app-wrapper:has(.page-spacing) .faq {
+  > h2 {
+    font-size: 22px;
+
+    @include media-tablet {
+      font-size: 28px;
+    }
+  }
+}
