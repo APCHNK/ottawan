@@ -81,6 +81,9 @@
         height: 100%;
         width: unset;
       }
+      @media screen and (max-width: 700px) {
+        margin-left: -35%;
+      }
     }
   }
 
