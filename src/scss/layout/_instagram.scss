@@ -23,6 +23,10 @@
     font-style: normal;
     font-weight: 600;
     line-height: 60px;
+    @media screen and (max-width: 768px) {
+      line-height: unset;
+      font-size: 30px;
+    }
 
     a {
       display: inline-flex;
@@ -30,7 +34,9 @@
       gap: 16px;
       color: inherit;
       text-decoration: none;
-
+      @media screen and (max-width: 768px) {
+        gap: 12px;
+      }
       &:hover .instagram-title__icon,
       &:focus-visible .instagram-title__icon {
         opacity: 0.7;
@@ -44,6 +50,10 @@
     flex-shrink: 0;
     transition: opacity 0.2s ease;
     margin-bottom: 4px;
+    @media screen and (max-width: 768px) {
+      width: 32px;
+      height: 32px;
+    }
   }
 }
 
