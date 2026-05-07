@@ -206,6 +206,15 @@
                     "name": "url",
                     "type": "url",
                     "default_value": ""
+                },
+                {
+                    "key": "field_instagram_title_as_link",
+                    "label": "Use Title as Link",
+                    "name": "title_as_link",
+                    "type": "true_false",
+                    "instructions": "Wrap the title in a link to the Instagram URL",
+                    "default_value": 0,
+                    "ui": 1
                 }
             ]
         }
