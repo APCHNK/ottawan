@@ -19,12 +19,31 @@
       <div class="columnar">
         <div class="header-wrap">
           <?php
-          // Front page uses `header_logo`; internal pages use `header_logo_internal`
-          // (with fallback to the home-page logo if the internal one isn't set).
+          $logo_text = trim((string) get_field('logo_text', 'option'));
+          $logo_icon = get_field('logo_icon', 'option');
+          $logo_color_home = get_field('logo_text_color_home', 'option') ?: '#ffffff';
+          $logo_color_internal = get_field('logo_text_color_internal', 'option') ?: '#000000';
+          $logo_color = is_front_page() ? $logo_color_home : $logo_color_internal;
+
+          // Image fallback (used only when no logo text is configured)
           $home_logo = get_field('header_logo', 'option') ?: get_field('logo', 'option');
           $internal_logo = get_field('header_logo_internal', 'option');
           $logo = is_front_page() ? $home_logo : ($internal_logo ?: $home_logo);
-          if ($logo) : ?>
+
+          if ($logo_text !== '') : ?>
+            <a href="<?php echo esc_url(home_url('/')); ?>" class="logo logo--text" style="color: <?php echo esc_attr($logo_color); ?>;">
+              <span class="logo__text"><?php echo esc_html($logo_text); ?></span>
+              <?php if ($logo_icon) : ?>
+                <span class="logo__icon">
+                  <?php echo adolfo_render_image($logo_icon, array(
+                    'loading'       => 'eager',
+                    'fetchpriority' => 'high',
+                    'decoding'      => 'sync',
+                  )); ?>
+                </span>
+              <?php endif; ?>
+            </a>
+          <?php elseif ($logo) : ?>
             <a href="<?php echo esc_url(home_url('/')); ?>" class="logo">
               <?php echo adolfo_render_image($logo, array(
                 'loading'       => 'eager',

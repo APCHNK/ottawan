@@ -3,24 +3,58 @@
     "title": "Header",
     "fields": [
         {
+            "key": "field_logo_text",
+            "label": "Logo Text",
+            "name": "logo_text",
+            "type": "text",
+            "default_value": "OTTAWAN",
+            "instructions": "Text shown next to the logo icon. Leave empty to use the image logo below instead."
+        },
+        {
+            "key": "field_logo_icon",
+            "label": "Logo Icon",
+            "name": "logo_icon",
+            "type": "image",
+            "return_format": "array",
+            "preview_size": "thumbnail",
+            "library": "all",
+            "instructions": "Small icon shown next to the logo text."
+        },
+        {
+            "key": "field_logo_text_color_home",
+            "label": "Logo Text Color (Home Page)",
+            "name": "logo_text_color_home",
+            "type": "color_picker",
+            "default_value": "#ffffff",
+            "wrapper": { "width": "50" }
+        },
+        {
+            "key": "field_logo_text_color_internal",
+            "label": "Logo Text Color (Internal Pages)",
+            "name": "logo_text_color_internal",
+            "type": "color_picker",
+            "default_value": "#000000",
+            "wrapper": { "width": "50" }
+        },
+        {
             "key": "field_header_logo",
-            "label": "Logo (Home Page)",
+            "label": "Logo Image (Home Page)",
             "name": "header_logo",
             "type": "image",
             "return_format": "array",
             "preview_size": "medium",
             "library": "all",
-            "instructions": "Logo shown in the header on the front page (over the dark hero banner)."
+            "instructions": "Fallback image logo for the front page (used only if Logo Text is empty)."
         },
         {
             "key": "field_header_logo_internal",
-            "label": "Logo (Internal Pages)",
+            "label": "Logo Image (Internal Pages)",
             "name": "header_logo_internal",
             "type": "image",
             "return_format": "array",
             "preview_size": "medium",
             "library": "all",
-            "instructions": "Optional alternate logo used on every page except the front page (e.g. dark version for the light pink surface). Falls back to the home-page logo if empty."
+            "instructions": "Fallback image logo for non-front pages (used only if Logo Text is empty). Falls back to the home-page image if empty."
         }
     ],
     "location": [

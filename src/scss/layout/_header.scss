@@ -25,6 +25,15 @@ header {
     .toggle-menu {
       .burger-icon { display: none; }
       .close-icon { display: block; }
+
+      .burger-icon path,
+      .close-icon path {
+        stroke: $color-white !important;
+      }
+    }
+
+    .logo--text {
+      color: $color-white !important;
     }
   }
 }
@@ -34,6 +43,45 @@ header {
   justify-content: space-between;
   position: relative;
   width: 100%;
+
+  .logo--text {
+    align-items: center;
+    display: inline-flex;
+    flex-shrink: 0;
+    font-family: "Inclusive Sans", sans-serif;
+    font-size: 20px;
+    font-weight: 700;
+    gap: 8px;
+    letter-spacing: 0.04em;
+    line-height: 1;
+    text-decoration: none;
+    text-transform: uppercase;
+    white-space: nowrap;
+
+    @include media-tablet {
+      font-size: 24px;
+    }
+
+    .logo__text {
+      color: inherit;
+    }
+
+    .logo__icon {
+      align-items: center;
+      display: inline-flex;
+      flex-shrink: 0;
+      height: 24px;
+      width: 24px;
+
+      img,
+      svg {
+        display: block;
+        height: 100%;
+        width: 100%;
+        object-fit: contain;
+      }
+    }
+  }
 
   .toggle-menu {
     cursor: pointer;
