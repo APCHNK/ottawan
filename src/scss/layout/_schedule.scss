@@ -39,6 +39,15 @@
         gap: 24px;
       }
 
+      &:not(:last-child) {
+        padding-bottom: 16px;
+        border-bottom: 1px solid $color-divider;
+
+        @include media-tablet {
+          padding-bottom: 24px;
+        }
+      }
+
       img {
         flex-shrink: 0;
         height: 91px;
@@ -112,12 +121,6 @@
           line-height: 20px;
         }
       }
-    }
-    hr {
-      background: $color-divider;
-      border: 0;
-      height: 1px;
-      margin: 0;
     }
   }
 }

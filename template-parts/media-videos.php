@@ -11,9 +11,12 @@ if (!$headline || !$videos) return;
   <div class="half">
     <?php foreach ($videos as $index => $video) : ?>
       <?php if (!empty($video['url'])) : ?>
+        <?php
+          $video_title = !empty($video['title']) ? $video['title'] : ($headline ? $headline . ' — video ' . ($index + 1) : 'Video ' . ($index + 1));
+        ?>
         <div class="media-wrap reveal reveal--up" data-reveal-delay="<?php echo ($index * 150); ?>">
           <iframe
-            title="iframe <?php echo $index; ?>"
+            title="<?php echo esc_attr($video_title); ?>"
             data-src="<?php echo esc_url($video['url']); ?>"
             loading="lazy"
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"

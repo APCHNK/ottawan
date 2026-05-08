@@ -59,9 +59,6 @@ endif;
           <?php endif; ?>
         </div>
       </li>
-      <?php if ($index < count($filtered) - 1) : ?>
-        <hr class="reveal" data-reveal-delay="<?php echo (count($filtered) * 100 + 500); ?>">
-      <?php endif; ?>
     <?php endforeach; ?>
   </ul>
 </div>
