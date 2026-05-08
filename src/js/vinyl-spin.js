@@ -1,8 +1,11 @@
 // Rotate the Golden Hits vinyl disc in sync with scroll position.
-// Key iOS detail: during momentum scroll, `scroll` events fire sparsely but
-// `window.scrollY` keeps updating every frame. So we poll scrollY inside a
-// rAF loop (gated by IntersectionObserver) instead of binding to `scroll`,
-// which eliminates the stepping you'd see with an event-driven approach.
+// iOS quirks handled here:
+//   1. `scroll` events fire sparsely during momentum scroll, but `scrollY`
+//      updates every frame — so we poll inside rAF instead of binding scroll.
+//   2. iOS Safari shows/hides the URL bar during scroll, which changes
+//      `window.innerHeight` mid-gesture. If we used innerHeight live as the
+//      divisor the rotation would jolt. We cache vh at init and only refresh
+//      on orientation change (with a settle delay).
 
 export function initVinylSpin() {
   const disc = document.querySelector('.songs-vinyl__disc');
@@ -12,6 +15,7 @@ export function initVinylSpin() {
 
   const TURNS_PER_VIEWPORT = 0.6;
 
+  let cachedVh = window.innerHeight || document.documentElement.clientHeight || 800;
   let currentDeg = 0;
   let inView = false;
   let rafId = null;
@@ -25,9 +29,8 @@ export function initVinylSpin() {
   };
 
   const tick = () => {
-    const vh = window.innerHeight || document.documentElement.clientHeight;
     const y = window.scrollY || window.pageYOffset || 0;
-    currentDeg = (y * TURNS_PER_VIEWPORT * 360) / vh;
+    currentDeg = (y * TURNS_PER_VIEWPORT * 360) / cachedVh;
     apply();
     rafId = inView ? requestAnimationFrame(tick) : null;
   };
@@ -43,9 +46,27 @@ export function initVinylSpin() {
   );
   observer.observe(disc);
 
+  // Refresh cached vh only on orientation change (after layout settles), and
+  // on big resize deltas (>250px) so the URL-bar shimmer is ignored.
+  const refreshVh = () => {
+    cachedVh = window.innerHeight || document.documentElement.clientHeight || cachedVh;
+  };
+
+  window.addEventListener('orientationchange', () => {
+    setTimeout(refreshVh, 250);
+  });
+
+  let resizeTimeout;
+  window.addEventListener('resize', () => {
+    clearTimeout(resizeTimeout);
+    resizeTimeout = setTimeout(() => {
+      const newVh = window.innerHeight || document.documentElement.clientHeight;
+      if (Math.abs(newVh - cachedVh) > 250) cachedVh = newVh;
+    }, 300);
+  }, { passive: true });
+
   // Snap to current scroll on init so it doesn't pop.
-  const vh = window.innerHeight || document.documentElement.clientHeight;
   const y = window.scrollY || window.pageYOffset || 0;
-  currentDeg = (y * TURNS_PER_VIEWPORT * 360) / vh;
+  currentDeg = (y * TURNS_PER_VIEWPORT * 360) / cachedVh;
   apply();
 }
