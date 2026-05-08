@@ -150,6 +150,10 @@ header {
     .lang-switcher {
       margin-left: 0;
     }
+    @media screen and (max-width: 767px) {
+      margin-left: 32px;
+      justify-content: flex-start;
+    }
   }
 
   .toggle-menu {
