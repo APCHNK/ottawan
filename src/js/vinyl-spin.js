@@ -23,6 +23,8 @@ export function initVinylSpin() {
   // Promote to a composited layer so iOS doesn't repaint on rotation.
   disc.style.willChange = 'transform';
   disc.style.backfaceVisibility = 'hidden';
+  // Short eased transition smooths between rAF samples without adding visible lag.
+  disc.style.transition = 'transform 160ms cubic-bezier(0.22, 1, 0.36, 1)';
 
   const apply = () => {
     disc.style.transform = `translate3d(0,0,0) rotate(${currentDeg.toFixed(2)}deg)`;
