@@ -55,6 +55,22 @@
             "preview_size": "medium",
             "library": "all",
             "instructions": "Fallback image logo for non-front pages (used only if Logo Text is empty). Falls back to the home-page image if empty."
+        },
+        {
+            "key": "field_lang_ru_url",
+            "label": "Ru Language URL",
+            "name": "lang_ru_url",
+            "type": "url",
+            "instructions": "Link for the Ru button. Leave empty to hide the button.",
+            "wrapper": { "width": "50" }
+        },
+        {
+            "key": "field_lang_en_url",
+            "label": "En Language URL",
+            "name": "lang_en_url",
+            "type": "url",
+            "instructions": "Link for the En button. Leave empty to hide the button.",
+            "wrapper": { "width": "50" }
         }
     ],
     "location": [

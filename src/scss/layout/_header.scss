@@ -35,6 +35,14 @@ header {
     .logo--text {
       color: $color-white !important;
     }
+
+    .header-social {
+      color: $color-white !important;
+    }
+
+    .header-divider {
+      background: rgba($color-white, 0.32) !important;
+    }
   }
 }
 .header-wrap {
@@ -80,6 +88,67 @@ header {
         width: 100%;
         object-fit: contain;
       }
+    }
+  }
+
+  .header-extras {
+    align-items: center;
+    display: none;
+    gap: 12px;
+
+    @include media-laptop {
+      display: inline-flex;
+      margin-left: 0;
+      order: 2;
+    }
+
+    .lang-switcher {
+      margin-left: 0;
+    }
+  }
+
+  .header-social {
+    align-items: center;
+    color: $color-white;
+    display: inline-flex;
+    height: 32px;
+    justify-content: center;
+    transition: opacity 0.2s ease;
+    width: 32px;
+
+    &:hover,
+    &:focus-visible {
+      opacity: 0.75;
+    }
+
+    svg {
+      display: block;
+      height: 100%;
+      width: 100%;
+    }
+  }
+
+  .header-divider {
+    background: rgba($color-white, 0.32);
+    display: inline-block;
+    height: 24px;
+    width: 1px;
+  }
+
+  .menu-extras {
+    align-items: center;
+    display: flex;
+    gap: 12px;
+    justify-content: center;
+    margin-top: 32px;
+    width: 100%;
+
+    @include media-laptop {
+      display: none;
+    }
+
+    .lang-switcher {
+      margin-left: 0;
     }
   }
 
@@ -142,6 +211,7 @@ header {
       height: auto;
       position: relative;
       opacity: 1;
+      order: 1;
     }
 
     ul {
@@ -579,6 +649,14 @@ header {
         stroke: $color-text;
       }
     }
+
+    .header-wrap .header-social {
+      color: $color-text;
+    }
+
+    .header-wrap .header-divider {
+      background: rgba(0, 0, 0, 0.32);
+    }
   }
 }
 
@@ -588,18 +666,19 @@ header {
   a,
   button {
     color: $color-text;
-    border-color: rgba(0, 0, 0, 0.18);
+    border-color: $color-text;
 
     &:hover {
       background: rgba(0, 0, 0, 0.05);
       color: $color-text;
-      border-color: rgba(0, 0, 0, 0.32);
+      border-color: $color-text;
     }
 
     &.is-active,
     &.current {
+      background: #d50064;
       color: $color-white;
-      border-color: $color-primary;
+      border-color: #d50064;
 
       &:hover {
         color: $color-white;
