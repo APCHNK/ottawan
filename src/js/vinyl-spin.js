@@ -1,8 +1,8 @@
-// Rotate the Golden Hits vinyl disc as the user scrolls past the section.
-// iOS Safari fires `scroll` sparsely during momentum scroll, so binding the
-// rotation directly to scroll events looks janky. Instead we keep a rAF loop
-// running while the disc is in view and lerp toward the scroll-derived target,
-// which smooths between sparse scroll samples on iPhone.
+// Rotate the Golden Hits vinyl disc in sync with scroll position.
+// Key iOS detail: during momentum scroll, `scroll` events fire sparsely but
+// `window.scrollY` keeps updating every frame. So we poll scrollY inside a
+// rAF loop (gated by IntersectionObserver) instead of binding to `scroll`,
+// which eliminates the stepping you'd see with an event-driven approach.
 
 export function initVinylSpin() {
   const disc = document.querySelector('.songs-vinyl__disc');
@@ -11,62 +11,41 @@ export function initVinylSpin() {
   if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
 
   const TURNS_PER_VIEWPORT = 0.6;
-  const LERP = 0.18;
 
-  let targetDeg = 0;
   let currentDeg = 0;
   let inView = false;
   let rafId = null;
 
-  // Promote to its own composited layer so iOS doesn't repaint the rotation.
+  // Promote to a composited layer so iOS doesn't repaint on rotation.
   disc.style.willChange = 'transform';
-
-  const computeTarget = () => {
-    const vh = window.innerHeight || document.documentElement.clientHeight;
-    const y = window.scrollY || window.pageYOffset || 0;
-    targetDeg = (y * TURNS_PER_VIEWPORT * 360) / vh;
-  };
+  disc.style.backfaceVisibility = 'hidden';
 
   const apply = () => {
     disc.style.transform = `translate3d(0,0,0) rotate(${currentDeg.toFixed(2)}deg)`;
   };
 
   const tick = () => {
-    const delta = targetDeg - currentDeg;
-    if (Math.abs(delta) < 0.05) {
-      currentDeg = targetDeg;
-    } else {
-      currentDeg += delta * LERP;
-    }
+    const vh = window.innerHeight || document.documentElement.clientHeight;
+    const y = window.scrollY || window.pageYOffset || 0;
+    currentDeg = (y * TURNS_PER_VIEWPORT * 360) / vh;
     apply();
     rafId = inView ? requestAnimationFrame(tick) : null;
-  };
-
-  const startLoop = () => {
-    if (rafId === null && inView) {
-      rafId = requestAnimationFrame(tick);
-    }
   };
 
   const observer = new IntersectionObserver(
     ([entry]) => {
       inView = entry.isIntersecting;
-      startLoop();
+      if (inView && rafId === null) {
+        rafId = requestAnimationFrame(tick);
+      }
     },
     { rootMargin: '50% 0px 50% 0px' }
   );
   observer.observe(disc);
 
-  // Initial state — snap to current scroll position so it doesn't ease in.
-  computeTarget();
-  currentDeg = targetDeg;
+  // Snap to current scroll on init so it doesn't pop.
+  const vh = window.innerHeight || document.documentElement.clientHeight;
+  const y = window.scrollY || window.pageYOffset || 0;
+  currentDeg = (y * TURNS_PER_VIEWPORT * 360) / vh;
   apply();
-
-  const onScroll = () => {
-    computeTarget();
-    startLoop();
-  };
-
-  window.addEventListener('scroll', onScroll, { passive: true });
-  window.addEventListener('resize', onScroll, { passive: true });
 }
