@@ -1,6 +1,12 @@
 <?php
-$title = get_sub_field('title');
-$items = get_sub_field('items');
+$title = get_sub_field('title'); // section title stays editable on the page block
+$items = get_field('schedule_items', 'option'); // dates managed globally in the Schedule options page
+
+// Fallback to the legacy per-page items so existing pages keep working
+// until the Schedule options page is filled in.
+if (!$items || !is_array($items)) {
+  $items = get_sub_field('items');
+}
 
 if (!$items || !is_array($items)) return;
 
@@ -29,9 +35,11 @@ function format_schedule_date($dateStr) {
   $parts = explode('/', $dateStr);
   if (count($parts) !== 3) return $dateStr;
   $ts = strtotime("{$parts[2]}-{$parts[1]}-{$parts[0]}");
-  return date('j F Y', $ts);
+  return date_i18n('j F Y', $ts); // month name follows the page locale (ru_RU on /ru/)
 }
 endif;
+
+$is_ru = strpos(get_locale(), 'ru') === 0;
 ?>
 <div class="schedule">
   <?php if ($title) : ?>
@@ -45,8 +53,9 @@ endif;
         <?php endif; ?>
         <div class="info">
           <div>
-            <?php if (!empty($item['text'])) : ?>
-              <h3><?php echo esc_html($item['text']); ?></h3>
+            <?php $item_text = ($is_ru && !empty($item['text_ru'])) ? $item['text_ru'] : ($item['text'] ?? ''); ?>
+            <?php if ($item_text) : ?>
+              <h3><?php echo esc_html($item_text); ?></h3>
             <?php endif; ?>
             <?php if (!empty($item['date'])) : ?>
               <span><?php echo esc_html(format_schedule_date($item['date'])); ?></span>
@@ -54,7 +63,7 @@ endif;
           </div>
           <?php if (!empty($item['link'])) : ?>
             <a href="<?php echo esc_url($item['link']); ?>" target="_blank" rel="noopener noreferrer">
-              <button class="button button--outline">Buy tickets</button>
+              <button class="button button--outline"><?php echo $is_ru ? 'Купить билеты' : 'Buy tickets'; ?></button>
             </a>
           <?php endif; ?>
         </div>
