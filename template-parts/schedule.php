@@ -41,7 +41,7 @@ endif;
 
 $is_ru = strpos(get_locale(), 'ru') === 0;
 ?>
-<div class="schedule">
+<div class="schedule" id="tour-dates" style="scroll-margin-top: 120px">
   <?php if ($title) : ?>
     <h2 class="reveal reveal--up"><?php echo esc_html($title); ?></h2>
   <?php endif; ?>
