@@ -31,7 +31,7 @@
           $logo = is_front_page() ? $home_logo : ($internal_logo ?: $home_logo);
 
           if ($logo_text !== '') : ?>
-            <a href="<?php echo esc_url(home_url('/')); ?>" class="logo logo--text" style="color: <?php echo esc_attr($logo_color); ?>;">
+            <a href="<?php echo esc_url(function_exists('pll_home_url') ? pll_home_url() : home_url('/')); ?>" class="logo logo--text" style="color: <?php echo esc_attr($logo_color); ?>;">
               <span class="logo__text"><?php echo esc_html($logo_text); ?></span>
               <?php if ($logo_icon) : ?>
                 <span class="logo__icon">
@@ -44,8 +44,10 @@
               <?php endif; ?>
             </a>
           <?php elseif ($logo) : ?>
-            <a href="<?php echo esc_url(home_url('/')); ?>" class="logo">
-              <?php echo adolfo_render_image($logo, array(
+            <a href="<?php echo esc_url(function_exists('pll_home_url') ? pll_home_url() : home_url('/')); ?>" class="logo">
+              <?php
+              if (is_array($logo) && empty($logo['alt'])) $logo['alt'] = satellite_cfg('brand');
+              echo adolfo_render_image($logo, array(
                 'loading'       => 'eager',
                 'fetchpriority' => 'high',
                 'decoding'      => 'sync',
@@ -53,7 +55,7 @@
               )); ?>
             </a>
           <?php else : ?>
-            <a href="<?php echo esc_url(home_url('/')); ?>" class="logo">
+            <a href="<?php echo esc_url(function_exists('pll_home_url') ? pll_home_url() : home_url('/')); ?>" class="logo">
               <img src="<?php echo get_template_directory_uri(); ?>/assets/icons/logo.svg" alt="<?php bloginfo('name'); ?>" width="175" height="48">
             </a>
           <?php endif; ?>

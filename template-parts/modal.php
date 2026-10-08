@@ -1,6 +1,8 @@
 <?php
 $form_id = get_field('form_id', 'option');
-$success_img = get_template_directory_uri() . '/assets/images/success.jpg';
+// success picture: the artist photo from Theme Options → Contact (no donor stock image)
+$contact_opts = get_field('contact', 'option');
+$success_img = !empty($contact_opts['image']['ID']) ? wp_get_attachment_image_url($contact_opts['image']['ID'], 'medium_large') : '';
 $close_icon = get_template_directory_uri() . '/assets/icons/close.svg';
 
 // Try to get CF7 form fields
@@ -12,7 +14,7 @@ if ($form_id) {
 <div class="modal-wrap">
   <div class="mask"></div>
   <div class="container">
-    <h2 class="modal-title">Request</h2>
+    <h2 class="modal-title" data-success-title="<?php echo esc_attr(satellite_cfg('brand')); ?>">Request</h2>
     <img class="close" src="<?php echo esc_url($close_icon); ?>" alt="close">
     <div class="content">
       <div class="form-content">
@@ -61,13 +63,22 @@ if ($form_id) {
       </div>
 
       <div class="success-message" style="display:none;">
-        <img src="<?php echo esc_url($success_img); ?>" alt="success" width="220" height="220" loading="lazy" decoding="async">
-        <p>Request Sent Successfully!</p>
-        <p>Thank you for your interest in Boney M.</p>
-        <p>We will be delighted to perform for you.</p>
-        <p>You got email, check your inbox !!! spam folder too !!!</p>
-        <p>Looking forward to hearing from you soon</p>
-        <p>Maya <a href="tel:+447869422699">+447869422699</a></p>
+        <?php if ($success_img) : ?>
+          <img src="<?php echo esc_url($success_img); ?>" alt="<?php echo esc_attr(satellite_cfg('brand')); ?>" loading="lazy" decoding="async">
+        <?php endif; ?>
+        <?php
+        $is_ru_modal = satellite_is_ru();
+        $modal_email = satellite_booking_email();
+        $thanks = satellite_cfg('thanks') ?: ['', ''];
+        ?>
+        <p><?php echo $is_ru_modal ? 'Заявка успешно отправлена!' : 'Request sent successfully!'; ?></p>
+        <?php if ($thanks[$is_ru_modal ? 1 : 0]) : ?>
+          <p><?php echo esc_html($thanks[$is_ru_modal ? 1 : 0]); ?></p>
+        <?php endif; ?>
+        <p><?php echo $is_ru_modal ? 'Наш букинг-менеджер свяжется с вами в ближайшее время.' : 'Our booking manager will get back to you shortly.'; ?></p>
+        <?php if ($modal_email) : ?>
+          <p>Email: <a href="mailto:<?php echo esc_attr($modal_email); ?>"><?php echo esc_html($modal_email); ?></a></p>
+        <?php endif; ?>
         <div class="btn">
           <button class="button button--primary">Close</button>
         </div>

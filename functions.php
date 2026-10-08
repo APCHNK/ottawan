@@ -317,3 +317,19 @@ add_filter('acf/format_value/name=footer_copyright', function ($value, $post_id,
 require_once get_template_directory() . '/inc/fix-translation-slugs.php';
 require_once get_template_directory() . '/inc/seo-front-translation.php';
 require_once get_template_directory() . '/inc/tour-dates-menu.php';
+require_once get_template_directory() . '/inc/site-seo.php';
+
+/** Site identity for inc/site-seo.php (schema graph, booking modal, Tour Dates page). */
+function satellite_site_config() {
+    return [
+        'brand'        => 'Ottawan',
+        'thanks'       => ['Thank you for your interest in Ottawan.', 'Спасибо за интерес к группе Ottawan.'],
+        'booking_slug' => 'contact-ottawan',
+        'book_cta'     => ['Book Ottawan', 'Заказать Оттаван'],
+        'main'         => 'ottawan',
+        'nodes'        => [
+            'ottawan' => ['type' => 'MusicGroup', 'name' => 'Ottawan', 'page' => 'about-ottawan', 'members' => ['patrick-jean-baptiste'], 'same_as_instagram' => true],
+            'patrick-jean-baptiste' => ['type' => 'Person', 'name' => 'Patrick Jean-Baptiste', 'page' => 'jean-baptiste-patrick', 'job' => ['Singer, lead vocalist of Ottawan', 'Певец, солист группы Ottawan'], 'member_of' => ['ottawan']],
+        ],
+    ];
+}

@@ -68,7 +68,7 @@
                     "label": "Title — big letters",
                     "name": "title",
                     "type": "text",
-                    "instructions": "Visible H1 in large letters (e.g. \"Liz Mitchell\"). Together with the small line it forms the full H1.",
+                    "instructions": "Visible H1 in large letters (e.g. \"Ottawan\"). Together with the small line it forms the full H1.",
                     "required": 0,
                     "conditional_logic": 0,
                     "wrapper": {
