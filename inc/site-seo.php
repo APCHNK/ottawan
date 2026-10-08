@@ -91,8 +91,20 @@ function satellite_country_code( $text ) {
 		'russia' => 'RU', 'mongolia' => 'MN', 'china' => 'CN', 'japan' => 'JP', 'australia' => 'AU',
 		'south africa' => 'ZA', 'brazil' => 'BR', 'mexico' => 'MX', 'argentina' => 'AR', 'india' => 'IN',
 	];
-	$parts = array_map( 'trim', explode( ',', strtolower( (string) $text ) ) );
-	return $map[ end( $parts ) ] ?? '';
+	return satellite_country_match( $text, $map )[1];
+}
+
+/** [ country name, ISO code ] of the first country named anywhere in $text, [ '', '' ] when none. */
+function satellite_country_match( $text, $map = null ) {
+	if ( null === $map ) { satellite_country_code( '' ); return satellite_country_match( $text, $GLOBALS['satellite_country_map'] ?? [] ); }
+	$GLOBALS['satellite_country_map'] = $map;
+	$text = strtolower( (string) $text );
+	$keys = array_keys( $map );
+	usort( $keys, fn( $a, $b ) => strlen( $b ) - strlen( $a ) ); // "united kingdom" before "uk"
+	foreach ( $keys as $k ) {
+		if ( preg_match( '/\\b' . preg_quote( $k, '/' ) . '\\b/', $text ) ) return [ strlen( $k ) <= 3 ? strtoupper( $k ) : ucwords( $k ), $map[ $k ] ];
+	}
+	return [ '', '' ];
 }
 
 function satellite_schema_id( $key ) {
@@ -180,14 +192,16 @@ add_filter( 'wpseo_schema_graph', function ( $graph, $context ) {
 		foreach ( satellite_upcoming_schedule() as [ $ts, $item ] ) {
 			$place_name = ( $is_ru && ! empty( $item['text_ru'] ) ) ? $item['text_ru'] : ( $item['text'] ?? '' );
 			if ( ! $place_name ) continue;
-			$place = [ '@type' => 'Place', 'name' => $place_name ];
-			if ( $code = satellite_country_code( $item['text'] ?? '' ) ) {
+			[ $country, $code ] = satellite_country_match( $item['text'] ?? '' );
+			// a bare country ("Ottawan in Latvia" → Latvia) is the only place data the schedule holds
+			$place = [ '@type' => 'Place', 'name' => $country ?: $place_name ];
+			if ( $code ) {
 				$place['address'] = [ '@type' => 'PostalAddress', 'addressCountry' => $code ];
 			}
 			$event = [
 				'@type'               => 'MusicEvent',
 				'@id'                 => $url . '#event-' . gmdate( 'Y-m-d', $ts ) . '-' . ( ++$n ),
-				'name'                => $name . ' — ' . ( $item['text'] ?? $place_name ),
+				'name'                => ( stripos( $item['text'] ?? '', (string) $name ) === 0 ? $item['text'] : $name . ' — ' . ( $item['text'] ?? $place_name ) ),
 				'startDate'           => gmdate( 'Y-m-d', $ts ),
 				'eventStatus'         => 'https://schema.org/EventScheduled',
 				'eventAttendanceMode' => 'https://schema.org/OfflineEventAttendanceMode',
