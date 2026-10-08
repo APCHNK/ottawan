@@ -232,3 +232,16 @@ add_action( 'template_redirect', function () {
 	wp_safe_redirect( function_exists( 'pll_home_url' ) ? pll_home_url() : home_url( '/' ), 301 );
 	exit;
 }, 5 );
+
+/**
+ * A Tour Dates page without upcoming dates is a thin placeholder: keep it
+ * reachable (follow) but out of the index until dates are added.
+ */
+add_filter( 'wpseo_robots', function ( $robots ) {
+	if ( is_page_template( 'template-tour.php' ) && ! satellite_upcoming_schedule() ) return 'noindex, follow';
+	return $robots;
+} );
+add_filter( 'wpseo_sitemap_entry', function ( $url, $type, $post ) {
+	if ( 'post' === $type && is_object( $post ) && 'template-tour.php' === get_page_template_slug( $post ) && ! satellite_upcoming_schedule() ) return false;
+	return $url;
+}, 10, 3 );
