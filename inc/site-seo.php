@@ -193,6 +193,7 @@ add_filter( 'wpseo_schema_graph', function ( $graph, $context ) {
 			$place_name = ( $is_ru && ! empty( $item['text_ru'] ) ) ? $item['text_ru'] : ( $item['text'] ?? '' );
 			if ( ! $place_name ) continue;
 			[ $country, $code ] = satellite_country_match( $item['text'] ?? '' );
+			if ( ! $code ) continue; // a MusicEvent needs at least a country it takes place in
 			// a bare country ("Ottawan in Latvia" → Latvia) is the only place data the schedule holds
 			$place = [ '@type' => 'Place', 'name' => $country ?: $place_name ];
 			if ( $code ) {
@@ -259,3 +260,27 @@ add_filter( 'wpseo_sitemap_entry', function ( $url, $type, $post ) {
 	if ( 'post' === $type && is_object( $post ) && 'template-tour.php' === get_page_template_slug( $post ) && ! satellite_upcoming_schedule() ) return false;
 	return $url;
 }, 10, 3 );
+
+/**
+ * No hreflang on pages that are not indexed (search results, a Tour Dates
+ * page without dates): alternates of a noindex page are a mixed signal.
+ */
+add_filter( 'pll_rel_hreflang_attributes', function ( $hreflangs ) {
+	if ( is_search() || ( is_page_template( 'template-tour.php' ) && ! satellite_upcoming_schedule() ) ) return [];
+	return $hreflangs;
+}, 20 ); // hreflang on noindex pages
+
+/**
+ * /{lang}/<front-page slug of another language>/ (e.g. /ru/home/ when the RU
+ * front page has its own slug) belongs to that language's front page.
+ */
+add_action( 'template_redirect', function () {
+	if ( ! function_exists( 'pll_languages_list' ) || ! is_page() ) return;
+	$path = (string) wp_parse_url( $_SERVER['REQUEST_URI'] ?? '', PHP_URL_PATH );
+	if ( ! preg_match( '#^/([a-z]{2})/#', $path, $m ) || ! in_array( $m[1], pll_languages_list(), true ) || $m[1] === pll_default_language() ) return;
+	$front = (int) get_option( 'page_on_front' );
+	$tr    = array_map( 'intval', (array) pll_get_post_translations( $front ) );
+	if ( ! in_array( (int) get_queried_object_id(), $tr, true ) ) return;
+	$target = untrailingslashit( get_option( 'home' ) ) . '/' . $m[1] . '/';
+	if ( trailingslashit( $path ) !== '/' . $m[1] . '/' ) { wp_safe_redirect( $target, 301 ); exit; }
+}, 4 );
