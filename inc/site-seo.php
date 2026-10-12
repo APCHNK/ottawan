@@ -194,11 +194,15 @@ add_filter( 'wpseo_schema_graph', function ( $graph, $context ) {
 			if ( ! $place_name ) continue;
 			[ $country, $code ] = satellite_country_match( $item['text'] ?? '' );
 			if ( ! $code ) continue; // a MusicEvent needs at least a country it takes place in
-			// a bare country ("Ottawan in Latvia" → Latvia) is the only place data the schedule holds
-			$place = [ '@type' => 'Place', 'name' => $country ?: $place_name ];
-			if ( $code ) {
-				$place['address'] = [ '@type' => 'PostalAddress', 'addressCountry' => $code ];
+			// "Country, City, Venue" in any order; a bare "Ottawan in Latvia" gives only the country
+			$rest = [];
+			foreach ( array_map( 'trim', explode( ',', (string) ( $item['text'] ?? '' ) ) ) as $part ) {
+				if ( $part !== '' && ! satellite_country_match( $part )[1] ) $rest[] = $part;
 			}
+			$locality = count( $rest ) >= 1 && strpos( (string) ( $item['text'] ?? '' ), ',' ) !== false ? $rest[0] : '';
+			$venue    = $rest[1] ?? '';
+			$place = [ '@type' => 'Place', 'name' => $venue ?: ( $locality ?: $country ) ];
+			$place['address'] = array_filter( [ '@type' => 'PostalAddress', 'addressLocality' => $locality, 'addressCountry' => $code ] );
 			$event = [
 				'@type'               => 'MusicEvent',
 				'@id'                 => $url . '#event-' . gmdate( 'Y-m-d', $ts ) . '-' . ( ++$n ),
